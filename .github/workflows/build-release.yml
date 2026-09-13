@@ -45,7 +45,7 @@ jobs:
           npm version ${{ steps.tag.outputs.new_version }} --no-git-tag-version
           
           # 2. Update manifest.json (Adjust path if manifest is inside a subfolder like 'public/manifest.json')
-          jq '.version = "${{ steps.tag.outputs.new_version }}"' manifest.json > manifest.tmp.json && mv manifest.tmp.json manifest.json
+jq --arg version "${{ steps.tag.outputs.new_version }}" '.version = $version' public/manifest.json > manifest.tmp.json && mv manifest.tmp.json public/manifest.json
           
       - name: Commit and Push Version Bump
         run: |
