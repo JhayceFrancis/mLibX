@@ -1,0 +1,6 @@
+{
+  "name": "mLibX",
+  "description": "mediaMetadata Library synX - Cross-platform media synchronization and cloud backup management.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

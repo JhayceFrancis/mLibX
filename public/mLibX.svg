@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 650 280" width="100%" height="100%" style="background-color: transparent;">
+    <defs>
+        <!-- Drop shadow applied to the movement layer -->
+        <filter id="shadow-prop" x="-50%" y="-50%" width="200%" height="200%">
+            <feDropShadow dx="0" dy="16" stdDeviation="12" flood-color="#000000" flood-opacity="0.8"/>
+        </filter>
+
+        <!-- Typography Gradients & Colours -->
+        <linearGradient id="grad-lib" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#38BDF8" />
+            <stop offset="100%" stop-color="#34D399" />
+        </linearGradient>
+
+        <!-- Propeller Blade Materials -->
+        <linearGradient id="grad-blade-base" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#334155" />
+            <stop offset="100%" stop-color="#0F172A" />
+        </linearGradient>
+        
+        <linearGradient id="grad-blade-edge" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="#38BDF8" />
+            <stop offset="100%" stop-color="#8B5CF6" />
+        </linearGradient>
+
+        <!-- Aerodynamic Industrial Propeller Blade Master -->
+        <g id="blade-master">
+            <path d="M -6,14 L -18,-45 C -18,-70 -6,-95 0,-100 C 6,-95 18,-70 18,-45 L 6,14 Z" fill="url(#grad-blade-base)" />
+            <path d="M 0,14 L 0,-100 C 6,-95 18,-70 18,-45 L 6,14 Z" fill="url(#grad-blade-edge)" opacity="0.8"/>
+            <line x1="-4" y1="0" x2="-8" y2="-50" stroke="#475569" stroke-width="1.5" stroke-linecap="round"/>
+        </g>
+
+        <!-- Assembled "X" Propeller (Rotated 45 degrees to natively rest in 'X' form) -->
+        <g id="massive-propeller" transform="rotate(45)">
+            <use href="#blade-master" transform="rotate(0)" />
+            <use href="#blade-master" transform="rotate(90)" />
+            <use href="#blade-master" transform="rotate(180)" />
+            <use href="#blade-master" transform="rotate(270)" />
+            
+            <circle cx="0" cy="0" r="18" fill="#0B1120" stroke="#38BDF8" stroke-width="4" />
+            <circle cx="0" cy="0" r="8" fill="#D946EF" />
+        </g>
+
+        <style>
+            .typography {
+                font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            }
+
+            /* 
+               UPDATED COORDINATES:
+               - Center Shift: The entire lockup (m, Lib, and X) shifted +25px right to optically center the logo block.
+               - Left Hover: Moved to 65px (pulling the blade tips extremely close to the 'm').
+               - Right Sweep: Extended to 850px (forcing it to shoot much further off the right side of the canvas).
+            */
+
+            /* Layer 1: Operates strictly BEHIND the text */
+            .prop-move-back {
+                animation: propMoveBack 15s infinite;
+            }
+
+            @keyframes propMoveBack {
+                0%, 46% { transform: translate(425px, 125px) scale(1.15); opacity: 1; animation-timing-function: ease-in-out; }
+                55% { transform: translate(65px, 125px) scale(1.15); opacity: 1; }
+                55.1%, 82.9% { transform: translate(65px, 125px) scale(1.15); opacity: 0; }
+                84% { transform: translate(65px, 125px) scale(1.15); opacity: 1; animation-timing-function: ease-in-out; }
+                94% { transform: translate(425px, 125px) scale(1.15); opacity: 1; }
+                100% { transform: translate(425px, 125px) scale(1.15); opacity: 1; }
+            }
+
+            /* Layer 2: Operates strictly IN FRONT of the text */
+            .prop-move-front {
+                animation: propMoveFront 15s infinite;
+            }
+
+            @keyframes propMoveFront {
+                0%, 55% { transform: translate(65px, 125px) scale(1.15); opacity: 0; }
+                55.1% { transform: translate(65px, 125px) scale(1.15); opacity: 1; }
+                68% { transform: translate(65px, 125px) scale(1.15); opacity: 1; animation-timing-function: ease-in; }
+                
+                /* First Sweep Right (Extended to 850px) */
+                73% { transform: translate(850px, 125px) scale(1.15); opacity: 0; }
+                73.1% { transform: translate(65px, 125px) scale(1.15); opacity: 0; animation-timing-function: ease-out; }
+                
+                /* Fade back in at Left */
+                75% { transform: translate(65px, 125px) scale(1.15); opacity: 1; animation-timing-function: ease-in; }
+                
+                /* Second Sweep Right (Extended to 850px) */
+                81% { transform: translate(850px, 125px) scale(1.15); opacity: 0; }
+                81.1%, 100% { transform: translate(65px, 125px) scale(1.15); opacity: 0; }
+            }
+
+            /* Rotation Engine */
+            .prop-spin {
+                animation: propSpin 15s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+                transform-origin: 0 0;
+            }
+
+            @keyframes propSpin {
+                0%, 42% { transform: rotate(0deg); }
+                100% { transform: rotate(10800deg); }
+            }
+        </style>
+    </defs>
+
+    <!-- Z-LAYER 1: BACK -->
+    <g class="prop-move-back" filter="url(#shadow-prop)">
+        <g class="prop-spin">
+            <use href="#massive-propeller" />
+        </g>
+    </g>
+
+    <!-- Z-LAYER 2: CORE TYPOGRAPHY (Shifted +25px Right for perfect optical centering) -->
+    <g class="typography">
+        <!-- "m" in solid neon fuchsia -->
+        <text x="160" y="150" font-size="95" font-weight="800" fill="#D946EF" letter-spacing="-2">m</text>
+        
+        <!-- "Lib" in Cyan-to-Mint gradient -->
+        <text x="245" y="150" font-size="95" font-weight="800" fill="url(#grad-lib)" letter-spacing="-2">Lib</text>
+    </g>
+
+    <!-- Z-LAYER 3: FRONT -->
+    <g class="prop-move-front" filter="url(#shadow-prop)">
+        <g class="prop-spin">
+            <use href="#massive-propeller" />
+        </g>
+    </g>
+</svg>

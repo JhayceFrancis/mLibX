@@ -1,0 +1,30 @@
+{
+  "manifest_version": 3,
+  "name": "mLibX",
+  "version": "1.0.0",
+  "description": "mediaMetadata Library synX - Real-time cross-platform media synchronization and cloud backup management.",
+  "permissions": ["storage", "tabs", "scripting", "activeTab"],
+  "host_permissions": [
+    "*://*.crunchyroll.com/*",
+    "*://graphql.anilist.co/*",
+    "*://api.tvmaze.com/*"
+  ],
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "mLibX Dashboard"
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "content_scripts": [
+    {
+      "matches": ["*://*.crunchyroll.com/*", "*://*.netflix.com/*"],
+      "js": ["content.js"]
+    }
+  ],
+  "icons": {
+    "16": "icon.png",
+    "48": "icon.png",
+    "128": "icon.png"
+  }
+}

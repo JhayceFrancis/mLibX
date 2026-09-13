@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+/* Theme Engine Overrides */
+
+/* Default (Dark Mode) is implicitly handled by Tailwind's defaults */
+
+[data-theme="light"] {
+  --color-zinc-950: #f8fafc;
+  --color-zinc-900: #ffffff;
+  --color-zinc-800: #e2e8f0;
+  --color-zinc-700: #cbd5e1;
+  --color-zinc-600: #94a3b8;
+  --color-zinc-500: #64748b;
+  --color-zinc-400: #475569;
+  --color-zinc-300: #334155;
+  --color-zinc-200: #1e293b;
+  --color-zinc-100: #0f172a;
+  --color-zinc-50:  #020617;
+  
+  --color-emerald-400: #059669;
+  --color-emerald-500: #047857;
+}
+
+[data-theme="cyberpunk"] {
+  --color-zinc-950: #000000;
+  --color-zinc-900: #1a0b2e;
+  --color-zinc-800: #2b124c;
+  --color-zinc-700: #49267a;
+  --color-zinc-600: #7c4dff;
+  --color-zinc-500: #fcee0a;
+  --color-zinc-400: #00f0ff;
+  --color-zinc-300: #00f0ff;
+  --color-zinc-200: #ffffff;
+  --color-zinc-100: #ffffff;
+  --color-zinc-50:  #ffffff;
+  
+  --color-emerald-400: #fcee0a;
+  --color-emerald-500: #ff003c;
+}
+
+[data-theme="cyberpunk"] .bg-emerald-500 {
+  background: linear-gradient(135deg, #ff003c, #7c4dff, #00f0ff) !important;
+  color: #ffffff !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.9);
+  box-shadow: 0 0 15px rgba(255, 0, 60, 0.4);
+  border: 1px solid rgba(255, 0, 60, 0.5);
+}
+
+[data-theme="cyberpunk"] .hover\:bg-emerald-400:hover {
+  background: linear-gradient(135deg, #fcee0a, #ff003c) !important;
+  color: #000000 !important;
+  text-shadow: none;
+  box-shadow: 0 0 20px rgba(252, 238, 10, 0.6) !important;
+  border-color: #fcee0a !important;
+}
+
+[data-theme="cyberpunk"] .text-emerald-500 {
+  color: #ff003c !important;
+  text-shadow: 0 0 8px rgba(255, 0, 60, 0.6);
+}
+
+[data-theme="cyberpunk"] .text-emerald-400 {
+  color: #fcee0a !important;
+  text-shadow: 0 0 8px rgba(252, 238, 10, 0.6);
+}
+
+[data-theme="cyberpunk"] .border-emerald-500 {
+  border-color: #ff003c !important;
+  box-shadow: inset 0 0 8px rgba(255, 0, 60, 0.3), 0 0 8px rgba(0, 240, 255, 0.3);
+}
+
+[data-theme="dracula"] {
+  --color-zinc-950: #282a36;
+  --color-zinc-900: #21222c;
+  --color-zinc-800: #44475a;
+  --color-zinc-700: #6272a4;
+  --color-zinc-600: #6272a4;
+  --color-zinc-500: #8be9fd;
+  --color-zinc-400: #bfcbcf;
+  --color-zinc-300: #f8f8f2;
+  --color-zinc-200: #ffffff;
+  --color-zinc-100: #ffffff;
+  --color-zinc-50:  #ffffff;
+  
+  --color-emerald-400: #ff79c6;
+  --color-emerald-500: #bd93f9;
+}
+
+[data-theme="nord"] {
+  --color-zinc-950: #2e3440;
+  --color-zinc-900: #3b4252;
+  --color-zinc-800: #434c5e;
+  --color-zinc-700: #4c566a;
+  --color-zinc-600: #4c566a;
+  --color-zinc-500: #d8dee9;
+  --color-zinc-400: #e5e9f0;
+  --color-zinc-300: #eceff4;
+  --color-zinc-200: #eceff4;
+  --color-zinc-100: #eceff4;
+  --color-zinc-50:  #ffffff;
+  
+  --color-emerald-400: #88c0d0;
+  --color-emerald-500: #5e81ac;
+}

@@ -1,0 +1,68 @@
+name: Build and Release mLibX Extension
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  release:
+    types: [created]
+
+jobs:
+  build:
+    name: Build for ${{ matrix.browser }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        browser: [chrome, edge, firefox, brave, safari]
+
+    steps:
+      - name: Checkout Source Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Lint and Type Check
+        run: npm run lint
+
+      - name: Build Extension Dashboard
+        run: npm run build
+
+      - name: Package Extension
+        run: |
+          # Create a specific directory for the browser package
+          mkdir -p extension-${{ matrix.browser }}
+          # Copy the compiled Vite output to the extension folder
+          cp -r dist/* extension-${{ matrix.browser }}/
+          # Zip the extension for distribution
+          cd extension-${{ matrix.browser }}
+          zip -r ../mLibX-${{ matrix.browser }}-extension.zip ./*
+
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: mLibX-${{ matrix.browser }}
+          path: mLibX-${{ matrix.browser }}-extension.zip
+
+  release-publish:
+    name: Publish Release Assets
+    needs: build
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download all artifacts
+        uses: actions/download-artifact@v4
+        with:
+          path: artifacts
+          
+      - name: Upload to GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: artifacts/**/*.zip
