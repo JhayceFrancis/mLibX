@@ -39,7 +39,7 @@ export function Overview({ stats, integrations, storage }: OverviewProps) {
           </div>
           <p className="text-3xl font-semibold text-zinc-100 mt-2">{activeIntegrations.length}</p>
           <div className="flex items-center gap-2 mt-4 text-xs text-zinc-400">
-            <span>Across {new Set(activeIntegrations.map(i => i.category)).size} categories</span>
+            <span>Across {new Set(activeIntegrations.flatMap(i => i.categories)).size} categories</span>
           </div>
         </div>
 
